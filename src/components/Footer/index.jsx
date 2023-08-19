@@ -4,7 +4,7 @@ import styled from "styled-components";
 function FotterStyled(){
   const Fotter = styled.footer`
   width: 100%;
-  height: 10vh;
+  height: 5vh;
   background-color: #9bf398;
   position: absolute;
   bottom: 0;
