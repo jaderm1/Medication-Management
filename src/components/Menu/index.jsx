@@ -30,7 +30,7 @@ function Menu() {
   name: 'Cadastro de Medicamentos',
   icon: <MedicationOutlinedIcon color='success' />
   },
-  {path: '/registerpharmacy',
+  {path: '/pharmacy-registry',
   name: 'Cadastro de Nova Farmácia',
   icon: <AddLocationAltOutlinedIcon color='success' />
 }]
