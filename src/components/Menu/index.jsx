@@ -53,7 +53,7 @@ function Menu() {
       >
 
      {pages.map(({path, name, icon}) => {return(
-              <BottomNavigationAction key={path} label={name} icon={icon} color='success' /> 
+              <BottomNavigationAction href={path} key={path} label={name} icon={icon} color='success' /> 
 
      )})}
      
