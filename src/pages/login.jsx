@@ -28,10 +28,13 @@ transform: translate(-50%, -50%);`
 
 
 function Login() {
+  
+  
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
+
 
 
 
