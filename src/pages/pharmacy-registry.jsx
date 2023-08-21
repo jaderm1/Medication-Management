@@ -8,20 +8,32 @@ import { useState } from "react";
 function PharmacyRegistry() {
 
 
-  const[cep, setCep] = useState("")
+  const [cep, setCep] = useState("")
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
-    
-  
-  
+  const [zipCodeError, setZipCodeError] = useState("")
 
 
 
-  function handleCep(event) {
-    setCep(event.target.value)
-    console.log(cep)
+
+
+
+  const handleZipCode = (e) => {
+    setCep(e.target.value)
+    if (!validateZipCode(e.target.value)) {
+      setZipCodeError("O formato do cep de conter 8 numeros")
+    }
+    else {
+      setZipCodeError("")
+
+    }
   }
 
+  const validateZipCode = (cep) => {
+    const zipCodeRegex = /^[0-9]{8}$/;
+
+    return zipCodeRegex.test(cep)
+  }
 
 
   const handleEmail = (e) => {
@@ -33,17 +45,17 @@ function PharmacyRegistry() {
       setEmailError("")
     }
   }
-   const validateEmail = (email) => {
+  const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
     return emailRegex.test(email)
   }
 
 
-  
+
 
   const inputFieldsRequired = [{
- 
+
     label: 'Razão social',
     name: 'company-name',
     id: 'company-name',
@@ -76,10 +88,11 @@ function PharmacyRegistry() {
   },
   {
     label: 'Cep',
-    name: 'cep',
-    id: 'cep',
+    name: 'ziopCode',
+    id: 'zipCode',
     value: cep,
-    handle: handleCep,
+    handle: handleZipCode,
+    error: zipCodeError,
 
   },
   {
@@ -95,7 +108,7 @@ function PharmacyRegistry() {
     label: 'Bairro',
     name: 'neighborhood',
     id: 'neighborhood',
-    
+
   }, {
     label: 'Cidade',
     name: 'city',
@@ -125,7 +138,7 @@ function PharmacyRegistry() {
 
       <MainStyled>
         {
-          inputFieldsRequired.map(({ label, name, id,value,handle,error}) => {
+          inputFieldsRequired.map(({ label, name, id, value, handle, error }) => {
             return (
               <TextField margin="normal" onChange={handle} value={value} error={Boolean(error)} helperText={error} key={name} required id={id} label={label} name={name} autoFocus variant="outlined" color='success'
                 sx={{
@@ -139,8 +152,8 @@ function PharmacyRegistry() {
         <TextField margin="normal" id="complement" label="Complemento" name="complement" autoFocus variant="outlined" color='success' sx={{
           margin: '1rem'
         }} />
-        
-    
+
+
 
       </MainStyled>
     </>
