@@ -8,32 +8,46 @@ import { useState } from "react";
 function PharmacyRegistry() {
 
 
-  const [cep, setCep] = useState("")
+  const[cep, setCep] = useState("")
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
   const [zipCodeError, setZipCodeError] = useState("")
+  const [neighborhood, setNeighborhood] = useState("")
+  const [street, setStreet] = useState("")
+  const [city, setCity] = useState("")
+  const [state, setState] = useState("")
 
-
-
+    
+  
+  
 
 
 
   const handleZipCode = (e) => {
     setCep(e.target.value)
-    if (!validateZipCode(e.target.value)) {
-      setZipCodeError("O formato do cep de conter 8 numeros")
-    }
+   if (!validateZipCode(e.target.value)) {
+      setZipCodeError("O formato do cep de conter 8 numeros")    }
     else {
       setZipCodeError("")
+      const url = `https://viacep.com.br/ws/${e.target.value}/json/`
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          setNeighborhood(data.bairro)
+          setStreet(data.logradouro)
+          setCity(data.localidade)
+          setState(data.uf)
 
+        })
     }
   }
 
-  const validateZipCode = (cep) => {
-    const zipCodeRegex = /^[0-9]{8}$/;
-
-    return zipCodeRegex.test(cep)
-  }
+  const validateZipCode = (cep)=>{ 
+   const zipCodeRegex = /^[0-9]{8}$/;
+  
+   return zipCodeRegex.test(cep)
+}
 
 
   const handleEmail = (e) => {
@@ -45,17 +59,17 @@ function PharmacyRegistry() {
       setEmailError("")
     }
   }
-  const validateEmail = (email) => {
+   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
     return emailRegex.test(email)
   }
 
 
-
+  
 
   const inputFieldsRequired = [{
-
+ 
     label: 'Razão social',
     name: 'company-name',
     id: 'company-name',
@@ -99,6 +113,8 @@ function PharmacyRegistry() {
     label: 'Rua',
     name: 'street',
     id: 'street',
+    value: street,
+    
   },
   {
     label: 'Número',
@@ -108,15 +124,18 @@ function PharmacyRegistry() {
     label: 'Bairro',
     name: 'neighborhood',
     id: 'neighborhood',
-
+    value: neighborhood,
+    
   }, {
     label: 'Cidade',
     name: 'city',
     id: 'city',
+    value: city,
   }, {
     label: 'Estado',
     name: 'state',
     id: 'state',
+    value: state,
 
   }, {
     label: 'Latitude '
@@ -138,7 +157,7 @@ function PharmacyRegistry() {
 
       <MainStyled>
         {
-          inputFieldsRequired.map(({ label, name, id, value, handle, error }) => {
+          inputFieldsRequired.map(({ label, name, id,value,handle,error}) => {
             return (
               <TextField margin="normal" onChange={handle} value={value} error={Boolean(error)} helperText={error} key={name} required id={id} label={label} name={name} autoFocus variant="outlined" color='success'
                 sx={{
@@ -152,8 +171,8 @@ function PharmacyRegistry() {
         <TextField margin="normal" id="complement" label="Complemento" name="complement" autoFocus variant="outlined" color='success' sx={{
           margin: '1rem'
         }} />
-
-
+        
+    
 
       </MainStyled>
     </>
