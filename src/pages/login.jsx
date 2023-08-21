@@ -37,7 +37,6 @@ function Login() {
 
 
 
-
   const handleEmail = (e) => {
     setEmail(e.target.value)
     if (!validateEmail(e.target.value)) {
@@ -135,7 +134,7 @@ function Login() {
           helperText={passwordError}
         />
 
-        <Button variant="outlined" color='success' type="submit" onSubmit={handleSubmit}>Login</Button>
+        <Button variant="outlined" color='success' type="submit">Login</Button>
       </Form>
 
       <FotterStyled />

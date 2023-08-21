@@ -2,6 +2,7 @@ import { MainStyled } from "../components/Main";
 import { Menu } from "../components/Menu";
 import { TextField } from "@mui/material";
 import { useState } from "react";
+import { Button } from "@mui/material";
 
 
 
@@ -16,6 +17,81 @@ function PharmacyRegistry() {
   const [street, setStreet] = useState("")
   const [city, setCity] = useState("")
   const [state, setState] = useState("")
+  const [fantasyName, setFantasyName] = useState("")
+  const [companyName, setCompanyName] = useState("")
+  const [cnpj, setCnpj] = useState("")
+  const [phone, setPhone] = useState("")
+  const [number, setNumber] = useState("")
+  const [complement, setComplement] = useState("")
+  const [latitude, setLatitude] = useState("")
+  const [longitude, setLongitude] = useState("")
+  const [phoneNumber, setPhoneNumber] = useState("")
+  
+  
+  
+  localStorage.setItem("cep",cep)
+  localStorage.setItem("email",email)
+  localStorage.setItem("neighborhood",neighborhood)
+  localStorage.setItem("street",street)
+  localStorage.setItem("city",city)
+  localStorage.setItem("state",state)
+  localStorage.setItem("email",email)
+  localStorage.setItem("fantasyName",fantasyName)
+  localStorage.setItem("companyName",companyName)
+  localStorage.setItem("cnpj",cnpj)
+  localStorage.setItem("phone",phone)
+  localStorage.setItem("number",number)
+  localStorage.setItem("complement",complement)
+  localStorage.setItem("latitude",latitude)
+  localStorage.setItem("longitude",longitude)
+  localStorage.setItem("phoneNumber",phoneNumber)
+  
+  
+  const handleFantasyName = (e) => {
+    setFantasyName(e.target.value)
+  }
+  const handleCompanyName = (e) => {
+    setCompanyName(e.target.value)
+  }
+  const handleCnpj = (e) => {
+    setCnpj(e.target.value)
+  }
+  const handlePhone = (e) => {
+    setPhone(e.target.value)
+  }
+  const handleNumber = (e) => {
+    setNumber(e.target.value)
+  }
+  const handleComplement = (e) => {
+    setComplement(e.target.value)
+  }
+
+  const handleLatitude = (e) => {
+    setLatitude(e.target.value)
+  }
+  const handleLongitude = (e) => {
+    setLongitude(e.target.value)
+  }
+ const handleStreet = (e) => {
+    setStreet(e.target.value)
+  }
+  const handleCity = (e) => {
+    setCity(e.target.value)
+  }
+   const handleState = (e) => {
+    setState(e.target.value)
+  }
+  const handleNeighborhood = (e) => {
+    setNeighborhood(e.target.value)
+  }
+ 
+  const handlePhoneNumber = (e) => {
+    setPhoneNumber(e.target.value)
+  }
+
+
+
+
 
     
   
@@ -73,17 +149,25 @@ function PharmacyRegistry() {
     label: 'Razão social',
     name: 'company-name',
     id: 'company-name',
+    value: companyName,
+    handle: handleCompanyName,
 
   },
   {
     label: 'Cnpj',
     name: 'cnpj',
     id: 'cnpj',
+    value: cnpj,
+    handle: handleCnpj,
 
   }, {
     label: 'Nome Fantasia',
     name: 'fantasy-name',
     id: 'fantasy-name',
+    value: fantasyName,
+    handle: handleFantasyName,
+
+    
   },
   {
     label: 'Email',
@@ -92,17 +176,23 @@ function PharmacyRegistry() {
     value: email,
     handle: handleEmail,
     error: emailError,
+
   },
   {
     label: 'Celular',
     name: 'phone',
     id: 'phone',
+    value: phone,
+    handle: handlePhone,
 
+  
+    
+    
 
   },
   {
     label: 'Cep',
-    name: 'ziopCode',
+    name: 'zipCode',
     id: 'zipCode',
     value: cep,
     handle: handleZipCode,
@@ -114,12 +204,16 @@ function PharmacyRegistry() {
     name: 'street',
     id: 'street',
     value: street,
+    handle: setStreet,
+
     
   },
   {
     label: 'Número',
     name: 'number',
     id: 'number',
+    value: number,
+    handle: handleNumber,
   }, {
     label: 'Bairro',
     name: 'neighborhood',
@@ -141,21 +235,33 @@ function PharmacyRegistry() {
     label: 'Latitude '
     , name: 'latitude'
     , id: 'latitude'
+    , value: latitude
+    , handle: handleLatitude
   }, {
     label: 'Longitude'
     , name: 'longitude'
     , id: 'longitude'
+    , value: longitude
+    , handle: handleLongitude
+    
   }
 
 
   ]
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    alert("Cadastro efetuado com sucesso")
+  }
 
   return (
     <>
       <Menu />
 
       <MainStyled>
+        <form
+        onSubmit={handleSubmit}>
         {
           inputFieldsRequired.map(({ label, name, id,value,handle,error}) => {
             return (
@@ -165,13 +271,22 @@ function PharmacyRegistry() {
                 }} />)
           })}
 
-        <TextField margin="normal" id="telephone" label="Telefone" name="telephone" autoFocus variant="outlined" color='success' sx={{
+        <TextField margin="normal" onChange={handlePhoneNumber} value={phoneNumber} key='phoneNumber' id="telephone" label="Telefone" name="telephone" autoFocus variant="outlined" color='success' sx={{
           margin: '1rem'
         }} />
-        <TextField margin="normal" id="complement" label="Complemento" name="complement" autoFocus variant="outlined" color='success' sx={{
+        <TextField margin="normal" onChange={handleComplement} value={complement} key='complement' id="complement" label="Complemento" name="complement" autoFocus variant="outlined" color='success' sx={{
           margin: '1rem'
-        }} />
+        }}
         
+        />
+
+
+        <Button  variant="outlined" color='success' type="submit" sx={{
+          margin: '1rem',
+          
+        }}>Cadastrar</Button>
+
+        </form>
     
 
       </MainStyled>

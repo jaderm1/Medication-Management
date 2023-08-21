@@ -8,6 +8,11 @@ height: 100%;
 top: 50%;
 right: 50%;
 transform: translate(60%, -50%);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
 
 
 `
