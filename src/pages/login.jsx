@@ -28,6 +28,8 @@ transform: translate(-50%, -50%);`
 
 
 function Login() {
+  
+  
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
@@ -44,7 +46,7 @@ function Login() {
       setEmailError("")
     }
   }
-  const validateEmail = (email) => {
+   const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
     return emailRegex.test(email)
@@ -132,7 +134,7 @@ function Login() {
           helperText={passwordError}
         />
 
-        <Button variant="outlined" color='success' type="submit" onSubmit={handleSubmit}>Login</Button>
+        <Button variant="outlined" color='success' type="submit">Login</Button>
       </Form>
 
       <FotterStyled />
