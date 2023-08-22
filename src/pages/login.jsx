@@ -4,7 +4,6 @@ import TextField from '@mui/material/TextField';
 import { Button, Typography, } from '@mui/material';
 import Logo from "../assets/logo.png"
 import {useNavigate } from "react-router-dom";
-import { FotterStyled } from "../components/Footer";
 
 const Form = styled.form`width: 50%;
 height: 70vh;
@@ -137,7 +136,6 @@ function Login() {
         <Button variant="outlined" color='success' type="submit">Login</Button>
       </Form>
 
-      <FotterStyled />
 
 
     </>

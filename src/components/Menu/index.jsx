@@ -26,7 +26,7 @@ function Menu() {
   name: 'Lista de Medicamentos',
   icon: <LocalPharmacyOutlinedIcon color='success'  />
   },
-  {path: '/register',
+  {path: '/medication-registry',
   name: 'Cadastro de Medicamentos',
   icon: <MedicationOutlinedIcon color='success' />
   },
