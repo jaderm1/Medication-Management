@@ -26,41 +26,60 @@ function PharmacyRegistry() {
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+
+  const [fantasyNameError, setFantasyNameError] = useState("")
+  const [companyNameError, setCompanyNameError] = useState("")
+  const [cnpjError, setCnpjError] = useState("")
+  const [phoneError, setPhoneError] = useState("")
+  const [numberError, setNumberError] = useState("")
+  const [latitudeError, setLatitudeError] = useState("")
+  const [longitudeError, setLongitudeError] = useState("")
+  const [neighborhoodError, setNeighborhoodError] = useState("")
+  const [streetError, setStreetError] = useState("")
+  const [cityError, setCityError] = useState("")
+  const [stateError, setStateError] = useState("")
   
+
   
-  
-  localStorage.setItem("cep",cep)
-  localStorage.setItem("email",email)
-  localStorage.setItem("neighborhood",neighborhood)
-  localStorage.setItem("street",street)
-  localStorage.setItem("city",city)
-  localStorage.setItem("state",state)
-  localStorage.setItem("email",email)
-  localStorage.setItem("fantasyName",fantasyName)
-  localStorage.setItem("companyName",companyName)
-  localStorage.setItem("cnpj",cnpj)
-  localStorage.setItem("phone",phone)
-  localStorage.setItem("number",number)
-  localStorage.setItem("complement",complement)
-  localStorage.setItem("latitude",latitude)
-  localStorage.setItem("longitude",longitude)
-  localStorage.setItem("phoneNumber",phoneNumber)
   
   
   const handleFantasyName = (e) => {
     setFantasyName(e.target.value)
-  }
+    }
+  
+   
+  
   const handleCompanyName = (e) => {
     setCompanyName(e.target.value)
+  
   }
   const handleCnpj = (e) => {
     setCnpj(e.target.value)
+    if (!validateCnpj(e.target.value)) {
+      setCnpjError("Cnpj inválido")
+    }
+    else{
+      setCnpjError("")
+    }
   }
   const handlePhone = (e) => {
     setPhone(e.target.value)
+    if (!validatePhone(e.target.value)) {
+      setPhoneError("Telefone inválido")
+      
+    }
+    else{
+      setPhoneError("")
+    }
   }
   const handleNumber = (e) => {
     setNumber(e.target.value)
+    if (isNaN(e.target.value)){
+      setNumberError("O número deve ser um número")
+    }
+    else{
+      setNumberError("")
+    }
   }
   const handleComplement = (e) => {
     setComplement(e.target.value)
@@ -68,9 +87,21 @@ function PharmacyRegistry() {
 
   const handleLatitude = (e) => {
     setLatitude(e.target.value)
+    if (e.target.value > 90 || e.target.value < -90) {
+      setLatitudeError("A latitude deve ser entre -90 e 90")
+    }
+    else {
+      setLatitudeError("")
+    }
   }
   const handleLongitude = (e) => {
     setLongitude(e.target.value)
+    if (e.target.value > 180 || e.target.value < -180) {
+      setLongitudeError("A longitude deve ser entre -180 e 180")
+    }
+    else {
+      setLongitudeError("")
+    }
   }
  const handleStreet = (e) => {
     setStreet(e.target.value)
@@ -90,15 +121,6 @@ function PharmacyRegistry() {
   }
 
 
-
-
-
-    
-  
-  
-
-
-
   const handleZipCode = (e) => {
     setCep(e.target.value)
    if (!validateZipCode(e.target.value)) {
@@ -109,7 +131,6 @@ function PharmacyRegistry() {
       fetch(url)
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           setNeighborhood(data.bairro)
           setStreet(data.logradouro)
           setCity(data.localidade)
@@ -119,11 +140,6 @@ function PharmacyRegistry() {
     }
   }
 
-  const validateZipCode = (cep)=>{ 
-   const zipCodeRegex = /^[0-9]{8}$/;
-  
-   return zipCodeRegex.test(cep)
-}
 
 
   const handleEmail = (e) => {
@@ -141,6 +157,24 @@ function PharmacyRegistry() {
     return emailRegex.test(email)
   }
 
+  const validateZipCode = (cep)=>{ 
+    const zipCodeRegex = /^[0-9]{8}$/;
+   
+    return zipCodeRegex.test(cep)
+ }
+  const validateCnpj = (cnpj)=>{
+    const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
+
+    return cnpjRegex.test(cnpj)
+  } 
+
+  const validatePhone = (phone) => {
+    const phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
+
+
+    return phoneRegex.test(phone)
+  }
+
 
   
 
@@ -151,6 +185,7 @@ function PharmacyRegistry() {
     id: 'company-name',
     value: companyName,
     handle: handleCompanyName,
+    error: companyNameError,
 
   },
   {
@@ -159,6 +194,7 @@ function PharmacyRegistry() {
     id: 'cnpj',
     value: cnpj,
     handle: handleCnpj,
+    error: cnpjError,
 
   }, {
     label: 'Nome Fantasia',
@@ -166,6 +202,8 @@ function PharmacyRegistry() {
     id: 'fantasy-name',
     value: fantasyName,
     handle: handleFantasyName,
+    error: fantasyNameError,
+
 
     
   },
@@ -184,6 +222,7 @@ function PharmacyRegistry() {
     id: 'phone',
     value: phone,
     handle: handlePhone,
+    error: phoneError,
 
   
     
@@ -198,14 +237,15 @@ function PharmacyRegistry() {
     handle: handleZipCode,
     error: zipCodeError,
 
+
   },
   {
     label: 'Rua',
     name: 'street',
     id: 'street',
     value: street,
-    handle: setStreet,
-
+    handle: handleStreet,
+    error: streetError,
     
   },
   {
@@ -214,22 +254,30 @@ function PharmacyRegistry() {
     id: 'number',
     value: number,
     handle: handleNumber,
+    error: numberError,
   }, {
     label: 'Bairro',
     name: 'neighborhood',
     id: 'neighborhood',
     value: neighborhood,
+    handle: handleNeighborhood,
+    error: neighborhoodError,
+
     
   }, {
     label: 'Cidade',
     name: 'city',
     id: 'city',
     value: city,
+    handle: handleCity,
+    error: cityError,
   }, {
     label: 'Estado',
     name: 'state',
     id: 'state',
     value: state,
+    handle: handleState,
+    error: stateError,
 
   }, {
     label: 'Latitude '
@@ -237,12 +285,14 @@ function PharmacyRegistry() {
     , id: 'latitude'
     , value: latitude
     , handle: handleLatitude
+    , error: latitudeError
   }, {
     label: 'Longitude'
     , name: 'longitude'
     , id: 'longitude'
     , value: longitude
     , handle: handleLongitude
+    , error: longitudeError
     
   }
 
@@ -251,8 +301,33 @@ function PharmacyRegistry() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+      alert("Cadastro realizado com sucesso!")
 
-    alert("Cadastro efetuado com sucesso")
+
+      
+      localStorage.setItem("cep",cep)
+      localStorage.setItem("email",email)
+      localStorage.setItem("neighborhood",neighborhood)
+      localStorage.setItem("street",street)
+      localStorage.setItem("city",city)
+      localStorage.setItem("state",state)
+      localStorage.setItem("email",email)
+      localStorage.setItem("fantasyName",fantasyName)
+      localStorage.setItem("companyName",companyName)
+      localStorage.setItem("cnpj",cnpj)
+      localStorage.setItem("phone",phone)
+      localStorage.setItem("number",number)
+      localStorage.setItem("complement",complement)
+      localStorage.setItem("latitude",latitude)
+      localStorage.setItem("longitude",longitude)
+      localStorage.setItem("phoneNumber",phoneNumber)
+    
+
+   
+  
+  
+
   }
 
   return (
@@ -265,7 +340,7 @@ function PharmacyRegistry() {
         {
           inputFieldsRequired.map(({ label, name, id,value,handle,error}) => {
             return (
-              <TextField margin="normal" onChange={handle} value={value} error={Boolean(error)} helperText={error} key={name} required id={id} label={label} name={name} autoFocus variant="outlined" color='success'
+              <TextField margin="normal" onChange={handle} required value={value} error={Boolean(error)} helperText={error} key={name}  id={id} label={label} name={name} autoFocus variant="outlined" color='success'
                 sx={{
                   margin: '1rem'
                 }} />)
