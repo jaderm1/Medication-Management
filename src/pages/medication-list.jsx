@@ -1,28 +1,53 @@
 import { Menu } from "../components/Menu";
 import { MainStyled } from "../components/Main";
-import {CardStyled} from "../components/Card";
+import { CardStyled } from "../components/Card";
 
 
 
-function MedicationList(){
-    return(
-        <>
 
-            <Menu/>
-              <MainStyled>
-                <CardStyled title="remedio" description="lorem"/>
-                <CardStyled title="remedio2" description="lorem"/>
-                <CardStyled title="remedio3" description="lorem"/>
-                <CardStyled title="remedio4" description="lorem"/>
-                <CardStyled title="remedio5" description="lorem"/>
-                <CardStyled title="remedio6" description="lorem"/>
-                
 
-                
-            </MainStyled>
-        </>
-    )
+function MedicationList() {
+  const newMedication = {
+    name: JSON.parse(localStorage.getItem('medicationName')),
+    laboratory: JSON.parse(localStorage.getItem('laboratoryName')),
+    dosage: JSON.parse(localStorage.getItem('dosage')),
+    quantity: JSON.parse(localStorage.getItem('quantity')),
+    price: JSON.parse(localStorage.getItem('price')),
+    type: JSON.parse(localStorage.getItem('type')),
+    description: JSON.parse(localStorage.getItem('description'))
+
+
+  }
+
+  return (
+    <>
+
+      <Menu />
+      <MainStyled>
+
+        <CardStyled
+          title={newMedication.name}
+
+          laboratory={newMedication.laboratory}
+          description={newMedication.description}
+          dosage={newMedication.dosage}
+          quantity={newMedication.quantity}
+          price={newMedication.price}
+          type={newMedication.type}
+
+        >
+          
+
+
+
+        </CardStyled>
+       
+
+
+      </MainStyled>
+    </>
+  )
 
 }
 
-export {MedicationList};
+export { MedicationList };

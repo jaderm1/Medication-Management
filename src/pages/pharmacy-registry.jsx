@@ -9,7 +9,7 @@ import { Button } from "@mui/material";
 function PharmacyRegistry() {
 
 
-  const[cep, setCep] = useState("")
+  const [cep, setCep] = useState("")
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
   const [zipCodeError, setZipCodeError] = useState("")
@@ -38,27 +38,27 @@ function PharmacyRegistry() {
   const [streetError, setStreetError] = useState("")
   const [cityError, setCityError] = useState("")
   const [stateError, setStateError] = useState("")
-  
 
-  
-  
-  
+
+
+
+
   const handleFantasyName = (e) => {
     setFantasyName(e.target.value)
-    }
-  
-   
-  
+  }
+
+
+
   const handleCompanyName = (e) => {
     setCompanyName(e.target.value)
-  
+
   }
   const handleCnpj = (e) => {
     setCnpj(e.target.value)
     if (!validateCnpj(e.target.value)) {
       setCnpjError("Cnpj inválido")
     }
-    else{
+    else {
       setCnpjError("")
     }
   }
@@ -66,18 +66,18 @@ function PharmacyRegistry() {
     setPhone(e.target.value)
     if (!validatePhone(e.target.value)) {
       setPhoneError("Telefone inválido")
-      
+
     }
-    else{
+    else {
       setPhoneError("")
     }
   }
   const handleNumber = (e) => {
     setNumber(e.target.value)
-    if (isNaN(e.target.value)){
+    if (isNaN(e.target.value)) {
       setNumberError("O número deve ser um número")
     }
-    else{
+    else {
       setNumberError("")
     }
   }
@@ -103,19 +103,19 @@ function PharmacyRegistry() {
       setLongitudeError("")
     }
   }
- const handleStreet = (e) => {
+  const handleStreet = (e) => {
     setStreet(e.target.value)
   }
   const handleCity = (e) => {
     setCity(e.target.value)
   }
-   const handleState = (e) => {
+  const handleState = (e) => {
     setState(e.target.value)
   }
   const handleNeighborhood = (e) => {
     setNeighborhood(e.target.value)
   }
- 
+
   const handlePhoneNumber = (e) => {
     setPhoneNumber(e.target.value)
   }
@@ -123,8 +123,9 @@ function PharmacyRegistry() {
 
   const handleZipCode = (e) => {
     setCep(e.target.value)
-   if (!validateZipCode(e.target.value)) {
-      setZipCodeError("O formato do cep de conter 8 numeros")    }
+    if (!validateZipCode(e.target.value)) {
+      setZipCodeError("O formato do cep de conter 8 numeros")
+    }
     else {
       setZipCodeError("")
       const url = `https://viacep.com.br/ws/${e.target.value}/json/`
@@ -151,22 +152,22 @@ function PharmacyRegistry() {
       setEmailError("")
     }
   }
-   const validateEmail = (email) => {
+  const validateEmail = (email) => {
     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
 
     return emailRegex.test(email)
   }
 
-  const validateZipCode = (cep)=>{ 
+  const validateZipCode = (cep) => {
     const zipCodeRegex = /^[0-9]{8}$/;
-   
+
     return zipCodeRegex.test(cep)
- }
-  const validateCnpj = (cnpj)=>{
+  }
+  const validateCnpj = (cnpj) => {
     const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
 
     return cnpjRegex.test(cnpj)
-  } 
+  }
 
   const validatePhone = (phone) => {
     const phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
@@ -176,10 +177,10 @@ function PharmacyRegistry() {
   }
 
 
-  
+
 
   const inputFieldsRequired = [{
- 
+
     label: 'Razão social',
     name: 'company-name',
     id: 'company-name',
@@ -205,7 +206,7 @@ function PharmacyRegistry() {
     error: fantasyNameError,
 
 
-    
+
   },
   {
     label: 'Email',
@@ -224,9 +225,9 @@ function PharmacyRegistry() {
     handle: handlePhone,
     error: phoneError,
 
-  
-    
-    
+
+
+
 
   },
   {
@@ -246,7 +247,7 @@ function PharmacyRegistry() {
     value: street,
     handle: handleStreet,
     error: streetError,
-    
+
   },
   {
     label: 'Número',
@@ -263,7 +264,7 @@ function PharmacyRegistry() {
     handle: handleNeighborhood,
     error: neighborhoodError,
 
-    
+
   }, {
     label: 'Cidade',
     name: 'city',
@@ -293,7 +294,7 @@ function PharmacyRegistry() {
     , value: longitude
     , handle: handleLongitude
     , error: longitudeError
-    
+
   }
 
 
@@ -301,32 +302,32 @@ function PharmacyRegistry() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    
-      alert("Cadastro realizado com sucesso!")
+
+    alert("Cadastro realizado com sucesso!")
 
 
-      
-      localStorage.setItem("cep",cep)
-      localStorage.setItem("email",email)
-      localStorage.setItem("neighborhood",neighborhood)
-      localStorage.setItem("street",street)
-      localStorage.setItem("city",city)
-      localStorage.setItem("state",state)
-      localStorage.setItem("email",email)
-      localStorage.setItem("fantasyName",fantasyName)
-      localStorage.setItem("companyName",companyName)
-      localStorage.setItem("cnpj",cnpj)
-      localStorage.setItem("phone",phone)
-      localStorage.setItem("number",number)
-      localStorage.setItem("complement",complement)
-      localStorage.setItem("latitude",latitude)
-      localStorage.setItem("longitude",longitude)
-      localStorage.setItem("phoneNumber",phoneNumber)
-    
 
-   
-  
-  
+    localStorage.setItem("cep", cep)
+    localStorage.setItem("email", email)
+    localStorage.setItem("neighborhood", neighborhood)
+    localStorage.setItem("street", street)
+    localStorage.setItem("city", city)
+    localStorage.setItem("state", state)
+    localStorage.setItem("email", email)
+    localStorage.setItem("fantasyName", fantasyName)
+    localStorage.setItem("companyName", companyName)
+    localStorage.setItem("cnpj", cnpj)
+    localStorage.setItem("phone", phone)
+    localStorage.setItem("number", number)
+    localStorage.setItem("complement", complement)
+    localStorage.setItem("latitude", latitude)
+    localStorage.setItem("longitude", longitude)
+    localStorage.setItem("phoneNumber", phoneNumber)
+
+
+
+
+
 
   }
 
@@ -336,33 +337,33 @@ function PharmacyRegistry() {
 
       <MainStyled>
         <form
-        onSubmit={handleSubmit}>
-        {
-          inputFieldsRequired.map(({ label, name, id,value,handle,error}) => {
-            return (
-              <TextField margin="normal" onChange={handle} required value={value} error={Boolean(error)} helperText={error} key={name}  id={id} label={label} name={name} autoFocus variant="outlined" color='success'
-                sx={{
-                  margin: '1rem'
-                }} />)
-          })}
+          onSubmit={handleSubmit}>
+          {
+            inputFieldsRequired.map(({ label, name, id, value, handle, error }) => {
+              return (
+                <TextField margin="normal" onChange={handle} required value={value} error={Boolean(error)} helperText={error} key={name} id={id} label={label} name={name} autoFocus variant="outlined" color='success'
+                  sx={{
+                    margin: '1rem'
+                  }} />)
+            })}
 
-        <TextField margin="normal" onChange={handlePhoneNumber} value={phoneNumber} key='phoneNumber' id="telephone" label="Telefone" name="telephone" autoFocus variant="outlined" color='success' sx={{
-          margin: '1rem'
-        }} />
-        <TextField margin="normal" onChange={handleComplement} value={complement} key='complement' id="complement" label="Complemento" name="complement" autoFocus variant="outlined" color='success' sx={{
-          margin: '1rem'
-        }}
-        
-        />
+          <TextField margin="normal" onChange={handlePhoneNumber} value={phoneNumber} key='phoneNumber' id="telephone" label="Telefone" name="telephone" autoFocus variant="outlined" color='success' sx={{
+            margin: '1rem'
+          }} />
+          <TextField margin="normal" onChange={handleComplement} value={complement} key='complement' id="complement" label="Complemento" name="complement" autoFocus variant="outlined" color='success' sx={{
+            margin: '1rem'
+          }}
+
+          />
 
 
-        <Button  variant="outlined" color='success' type="submit" sx={{
-          margin: '1rem',
-          
-        }}>Cadastrar</Button>
+          <Button variant="outlined" color='success' type="submit" sx={{
+            margin: '1rem',
+
+          }}>Cadastrar</Button>
 
         </form>
-    
+
 
       </MainStyled>
     </>
