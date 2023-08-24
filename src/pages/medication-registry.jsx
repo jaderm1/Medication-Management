@@ -59,13 +59,13 @@ const handleSubmit = (e) => {
 
   alert("Medicamento cadastrado com sucesso")
 
-  localStorage.setItem("medicationName",medicationName)
-    localStorage.setItem("laboratoryName",laboratoryName)
-    localStorage.setItem("dosage",dosage)
-    localStorage.setItem("quantity",quantity)
-    localStorage.setItem("price",price)
-    localStorage.setItem("description",description)
-    localStorage.setItem("type",type)
+  localStorage.setItem("medicationName",JSON.stringify(medicationName))
+    localStorage.setItem("laboratoryName",JSON.stringify(laboratoryName))
+    localStorage.setItem("dosage",JSON.stringify(dosage))
+    localStorage.setItem("quantity",JSON.stringify(quantity))
+    localStorage.setItem("price",JSON.stringify(price))
+    localStorage.setItem("description",JSON.stringify(description))
+    localStorage.setItem("type",JSON.stringify(type))
     
 
 }
