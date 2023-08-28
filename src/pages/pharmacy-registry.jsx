@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { MainStyled } from "../components/Main";
 import { Menu } from "../components/Menu";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 
 
@@ -26,25 +27,24 @@ function PharmacyRegistry() {
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [pharmacyList, setPharmacyList] = useState([]);
+
+
+  useEffect(() => {
+    const storedList = localStorage.getItem("List");
+    if (storedList) {
+      setPharmacyList(JSON.parse(storedList));
+    }
+  }, []);
+
+
+
+
   
   
   
-  localStorage.setItem("cep",cep)
-  localStorage.setItem("email",email)
-  localStorage.setItem("neighborhood",neighborhood)
-  localStorage.setItem("street",street)
-  localStorage.setItem("city",city)
-  localStorage.setItem("state",state)
-  localStorage.setItem("email",email)
-  localStorage.setItem("fantasyName",fantasyName)
-  localStorage.setItem("companyName",companyName)
-  localStorage.setItem("cnpj",cnpj)
-  localStorage.setItem("phone",phone)
-  localStorage.setItem("number",number)
-  localStorage.setItem("complement",complement)
-  localStorage.setItem("latitude",latitude)
-  localStorage.setItem("longitude",longitude)
-  localStorage.setItem("phoneNumber",phoneNumber)
+
+
   
   
   const handleFantasyName = (e) => {
@@ -71,9 +71,6 @@ function PharmacyRegistry() {
   }
   const handleLongitude = (e) => {
     setLongitude(e.target.value)
-  }
- const handleStreet = (e) => {
-    setStreet(e.target.value)
   }
   const handleCity = (e) => {
     setCity(e.target.value)
@@ -250,9 +247,54 @@ function PharmacyRegistry() {
   ]
 
   const handleSubmit = (e) => {
+
+    const inputs = {}
+  
+    inputs.fantasyName = fantasyName
+    inputs.companyName = companyName
+    inputs.cnpj = cnpj
+    inputs.phone = phone
+    inputs.number = number
+    inputs.complement = complement
+    inputs.latitude = latitude
+    inputs.longitude = longitude
+    inputs.email = email
+    inputs.cep = cep
+    inputs.street = street
+    inputs.city = city
+    inputs.state = state
+    inputs.neighborhood = neighborhood
+    inputs.id = pharmacyList.length + 1
+    inputs.phoneNumber = phoneNumber
+
+    setPharmacyList([...pharmacyList, inputs]);
+
+    localStorage.setItem("List", JSON.stringify([...pharmacyList, inputs]));
+
+        alert("Cadastro efetuado com sucesso")
+
+
     e.preventDefault()
 
-    alert("Cadastro efetuado com sucesso")
+    setCep('');
+    setEmail('');
+    setEmailError('');
+    setZipCodeError('');
+    setNeighborhood('');
+    setStreet('');
+    setCity('');
+    setState('');
+    setFantasyName('');
+    setCompanyName('');
+    setCnpj('');
+    setPhone('');
+    setNumber('');
+    setComplement('');
+    setLatitude('');
+    setLongitude('');
+    setPhoneNumber('');
+    
+
   }
 
   return (
