@@ -1,7 +1,7 @@
 import { Menu } from "../components/Menu";
 import { MainStyled } from "../components/Main";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import MenuItem from '@mui/material/MenuItem';
 
@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 function MedicationRegistry() {
   const [medicationName, setMedicationName] = useState("")
+<<<<<<< HEAD
   const [medicationNameError, setMedicationNameError] = useState("")
   const [laboratoryName, setLaboratoryName] = useState("")
   const [laboratoryNameError, setLaboratoryNameError] = useState("")
@@ -23,6 +24,28 @@ function MedicationRegistry() {
 
 
 
+=======
+  const [laboratoryName, setLaboratoryName] = useState("")
+  const [dosage, setDosage] = useState("")
+  const [quantity, setQuantity] = useState("")
+  const [quantityError, setQuantityError] = useState("")
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [type, setType] = useState("")
+  const [medicationList, setMedicationList] = useState([]);
+
+
+
+  useEffect(() => {
+    const storedList = localStorage.getItem("List");
+    if (storedList) {
+      setMedicationList(JSON.parse(storedList));
+    }
+  }, []);
+
+
+
+>>>>>>> develop
   const handleMedicationName = (e) => {
     setMedicationName(e.target.value)
   }
@@ -44,9 +67,13 @@ function MedicationRegistry() {
   const handlePrice = (e) => {
     setPrice(e.target.value)
   }
+<<<<<<< HEAD
   const handleQuantityError = (e) => {
     setQuantityError(e.target.value)
   }
+=======
+ 
+>>>>>>> develop
   const handleDescription = (e) => {
     setDescription(e.target.value)
   }
@@ -55,6 +82,7 @@ function MedicationRegistry() {
   }
 
   const handleSubmit = (e) => {
+<<<<<<< HEAD
     e.preventDefault()
 
     alert("Medicamento cadastrado com sucesso")
@@ -67,6 +95,45 @@ function MedicationRegistry() {
     localStorage.setItem("description", JSON.stringify(description))
     localStorage.setItem("type", JSON.stringify(type))
 
+=======
+
+    const inputs = {}
+
+    inputs.medicationName = medicationName
+    inputs.laboratoryName = laboratoryName
+    inputs.dosage = dosage
+    inputs.quantity = quantity
+    inputs.price = price
+    inputs.description = description
+    inputs.type = type
+    inputs.id = medicationList.length + 1
+
+
+    setMedicationList([...medicationList, inputs]);
+
+
+    localStorage.setItem("List", JSON.stringify([...medicationList, inputs]));
+
+    
+    
+
+    alert("Medicamento cadastrado com sucesso")
+
+    e.preventDefault()
+
+    setMedicationName("")
+    setLaboratoryName("")
+    setDosage("")
+    setQuantity("")
+    setPrice("")
+    setDescription("")
+    setType("")
+  
+
+
+   
+
+>>>>>>> develop
 
   }
 
@@ -79,7 +146,10 @@ function MedicationRegistry() {
     id: 'medicationName',
     value: medicationName,
     handle: handleMedicationName,
+<<<<<<< HEAD
     error: medicationNameError
+=======
+>>>>>>> develop
   },
   {
     label: 'Nome do Laboratório',
@@ -87,7 +157,10 @@ function MedicationRegistry() {
     id: 'laboratoryName',
     value: laboratoryName,
     handle: handleLaboratoryName,
+<<<<<<< HEAD
     error: laboratoryNameError
+=======
+>>>>>>> develop
 
   }, {
     label: 'Dosagem',
@@ -95,7 +168,10 @@ function MedicationRegistry() {
     id: 'dosage',
     value: dosage,
     handle: handleDosage,
+<<<<<<< HEAD
     error: dosageError
+=======
+>>>>>>> develop
   }, {
     label: 'Quantidade',
     name: 'quantity',
@@ -110,7 +186,10 @@ function MedicationRegistry() {
     id: 'price',
     value: price,
     handle: handlePrice,
+<<<<<<< HEAD
     error: priceError
+=======
+>>>>>>> develop
 
   }]
 
@@ -175,7 +254,11 @@ function MedicationRegistry() {
 
           </TextField>
 
+<<<<<<< HEAD
           <TextField margin="normal" onChange={handleDescription} value={description} id="descrition" multiline label={'Descrição'} color="success" sx={{
+=======
+          <TextField margin="normal" onChange={handleDescription} value={description} id="description" multiline label={'Descrição'} color="success" sx={{
+>>>>>>> develop
             margin: '1rem',
             width: '90%'
 
