@@ -9,22 +9,6 @@ import MenuItem from '@mui/material/MenuItem';
 
 function MedicationRegistry() {
   const [medicationName, setMedicationName] = useState("")
-<<<<<<< HEAD
-  const [medicationNameError, setMedicationNameError] = useState("")
-  const [laboratoryName, setLaboratoryName] = useState("")
-  const [laboratoryNameError, setLaboratoryNameError] = useState("")
-  const [dosage, setDosage] = useState("")
-  const [dosageError, setDosageError] = useState("")
-  const [quantity, setQuantity] = useState("")
-  const [quantityError, setQuantityError] = useState("")
-  const [price, setPrice] = useState("")
-  const [priceError, setPriceError] = useState("")
-  const [description, setDescription] = useState("")
-  const [type, setType] = useState("")
-
-
-
-=======
   const [laboratoryName, setLaboratoryName] = useState("")
   const [dosage, setDosage] = useState("")
   const [quantity, setQuantity] = useState("")
@@ -45,7 +29,6 @@ function MedicationRegistry() {
 
 
 
->>>>>>> develop
   const handleMedicationName = (e) => {
     setMedicationName(e.target.value)
   }
@@ -67,13 +50,7 @@ function MedicationRegistry() {
   const handlePrice = (e) => {
     setPrice(e.target.value)
   }
-<<<<<<< HEAD
-  const handleQuantityError = (e) => {
-    setQuantityError(e.target.value)
-  }
-=======
  
->>>>>>> develop
   const handleDescription = (e) => {
     setDescription(e.target.value)
   }
@@ -82,20 +59,6 @@ function MedicationRegistry() {
   }
 
   const handleSubmit = (e) => {
-<<<<<<< HEAD
-    e.preventDefault()
-
-    alert("Medicamento cadastrado com sucesso")
-
-    localStorage.setItem("medicationName", JSON.stringify(medicationName))
-    localStorage.setItem("laboratoryName", JSON.stringify(laboratoryName))
-    localStorage.setItem("dosage", JSON.stringify(dosage))
-    localStorage.setItem("quantity", JSON.stringify(quantity))
-    localStorage.setItem("price", JSON.stringify(price))
-    localStorage.setItem("description", JSON.stringify(description))
-    localStorage.setItem("type", JSON.stringify(type))
-
-=======
 
     const inputs = {}
 
@@ -133,7 +96,6 @@ function MedicationRegistry() {
 
    
 
->>>>>>> develop
 
   }
 
@@ -146,10 +108,6 @@ function MedicationRegistry() {
     id: 'medicationName',
     value: medicationName,
     handle: handleMedicationName,
-<<<<<<< HEAD
-    error: medicationNameError
-=======
->>>>>>> develop
   },
   {
     label: 'Nome do Laboratório',
@@ -157,10 +115,6 @@ function MedicationRegistry() {
     id: 'laboratoryName',
     value: laboratoryName,
     handle: handleLaboratoryName,
-<<<<<<< HEAD
-    error: laboratoryNameError
-=======
->>>>>>> develop
 
   }, {
     label: 'Dosagem',
@@ -168,10 +122,6 @@ function MedicationRegistry() {
     id: 'dosage',
     value: dosage,
     handle: handleDosage,
-<<<<<<< HEAD
-    error: dosageError
-=======
->>>>>>> develop
   }, {
     label: 'Quantidade',
     name: 'quantity',
@@ -186,10 +136,6 @@ function MedicationRegistry() {
     id: 'price',
     value: price,
     handle: handlePrice,
-<<<<<<< HEAD
-    error: priceError
-=======
->>>>>>> develop
 
   }]
 
@@ -254,11 +200,7 @@ function MedicationRegistry() {
 
           </TextField>
 
-<<<<<<< HEAD
-          <TextField margin="normal" onChange={handleDescription} value={description} id="descrition" multiline label={'Descrição'} color="success" sx={{
-=======
           <TextField margin="normal" onChange={handleDescription} value={description} id="description" multiline label={'Descrição'} color="success" sx={{
->>>>>>> develop
             margin: '1rem',
             width: '90%'
 

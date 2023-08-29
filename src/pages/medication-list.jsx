@@ -7,17 +7,7 @@ import { CardStyled } from "../components/Card";
 
 
 function MedicationList() {
-  const newMedication = {
-    name: JSON.parse(localStorage.getItem('medicationName')),
-    laboratory: JSON.parse(localStorage.getItem('laboratoryName')),
-    dosage: JSON.parse(localStorage.getItem('dosage')),
-    quantity: JSON.parse(localStorage.getItem('quantity')),
-    price: JSON.parse(localStorage.getItem('price')),
-    type: JSON.parse(localStorage.getItem('type')),
-    description: JSON.parse(localStorage.getItem('description'))
-
-
-  }
+  const medicationList = JSON.parse(localStorage.getItem("List"))||[]
 
   return (
     <>
@@ -25,22 +15,28 @@ function MedicationList() {
       <Menu />
       <MainStyled>
 
-        <CardStyled
-          title={newMedication.name}
-
-          laboratory={newMedication.laboratory}
-          description={newMedication.description}
-          dosage={newMedication.dosage}
-          quantity={newMedication.quantity}
-          price={newMedication.price}
-          type={newMedication.type}
-
-        >
+      {medicationList.map((medicationList) => {
+        return (
+          <CardStyled
+          title={medicationList.medicationName}
+          laboratory={medicationList.laboratoryName}
+          description={medicationList.description}
+          dosage={medicationList.dosage}
+          quantity={medicationList.quantity}
+          price={medicationList.price}
+          type={medicationList.type}
+          >
+          </CardStyled>
+        )
+      })}
+         
+        
+     
+        
           
 
 
 
-        </CardStyled>
        
 
 
