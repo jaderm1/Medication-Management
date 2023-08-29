@@ -84,6 +84,15 @@ function MedicationRegistry() {
 
     e.preventDefault()
 
+    setMedicationName("")
+    setLaboratoryName("")
+    setDosage("")
+    setQuantity("")
+    setPrice("")
+    setDescription("")
+    setType("")
+  
+
 
    
 
