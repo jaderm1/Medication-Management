@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { MainStyled } from "../components/Main";
 import { Menu } from "../components/Menu";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 
 
@@ -26,6 +27,15 @@ function PharmacyRegistry() {
   const [latitude, setLatitude] = useState("")
   const [longitude, setLongitude] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
+  const [pharmacyList, setPharmacyList] = useState([]);
+
+
+  useEffect(() => {
+    const storedList = localStorage.getItem("List");
+    if (storedList) {
+      setPharmacyList(JSON.parse(storedList));
+    }
+  }, []);
 
   const [fantasyNameError, setFantasyNameError] = useState("")
   const [companyNameError, setCompanyNameError] = useState("")
@@ -45,13 +55,9 @@ function PharmacyRegistry() {
   
   const handleFantasyName = (e) => {
     setFantasyName(e.target.value)
-    }
-  
-   
-  
+  }
   const handleCompanyName = (e) => {
     setCompanyName(e.target.value)
-  
   }
   const handleCnpj = (e) => {
     setCnpj(e.target.value)
@@ -140,6 +146,11 @@ function PharmacyRegistry() {
     }
   }
 
+  const validateZipCode = (cep)=>{ 
+   const zipCodeRegex = /^[0-9]{8}$/;
+  
+   return zipCodeRegex.test(cep)
+}
 
 
   const handleEmail = (e) => {
@@ -156,27 +167,6 @@ function PharmacyRegistry() {
 
     return emailRegex.test(email)
   }
-
-  const validateZipCode = (cep)=>{ 
-    const zipCodeRegex = /^[0-9]{8}$/;
-   
-    return zipCodeRegex.test(cep)
- }
-  const validateCnpj = (cnpj)=>{
-    const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
-
-    return cnpjRegex.test(cnpj)
-  } 
-
-  const validatePhone = (phone) => {
-    const phoneRegex = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
-
-
-    return phoneRegex.test(phone)
-  }
-
-
-  
 
   const inputFieldsRequired = [{
  
@@ -300,33 +290,53 @@ function PharmacyRegistry() {
   ]
 
   const handleSubmit = (e) => {
+
+    const inputs = {}
+  
+    inputs.fantasyName = fantasyName
+    inputs.companyName = companyName
+    inputs.cnpj = cnpj
+    inputs.phone = phone
+    inputs.number = number
+    inputs.complement = complement
+    inputs.latitude = latitude
+    inputs.longitude = longitude
+    inputs.email = email
+    inputs.cep = cep
+    inputs.street = street
+    inputs.city = city
+    inputs.state = state
+    inputs.neighborhood = neighborhood
+    inputs.id = pharmacyList.length + 1
+    inputs.phoneNumber = phoneNumber
+
+    setPharmacyList([...pharmacyList, inputs]);
+
+    localStorage.setItem("List", JSON.stringify([...pharmacyList, inputs]));
+
+        alert("Cadastro efetuado com sucesso")
+
+
     e.preventDefault()
+
+    setCep('');
+    setEmail('');
+    setEmailError('');
+    setZipCodeError('');
+    setNeighborhood('');
+    setStreet('');
+    setCity('');
+    setState('');
+    setFantasyName('');
+    setCompanyName('');
+    setCnpj('');
+    setPhone('');
+    setNumber('');
+    setComplement('');
+    setLatitude('');
+    setLongitude('');
+    setPhoneNumber('');
     
-      alert("Cadastro realizado com sucesso!")
-
-
-      
-      localStorage.setItem("cep",cep)
-      localStorage.setItem("email",email)
-      localStorage.setItem("neighborhood",neighborhood)
-      localStorage.setItem("street",street)
-      localStorage.setItem("city",city)
-      localStorage.setItem("state",state)
-      localStorage.setItem("email",email)
-      localStorage.setItem("fantasyName",fantasyName)
-      localStorage.setItem("companyName",companyName)
-      localStorage.setItem("cnpj",cnpj)
-      localStorage.setItem("phone",phone)
-      localStorage.setItem("number",number)
-      localStorage.setItem("complement",complement)
-      localStorage.setItem("latitude",latitude)
-      localStorage.setItem("longitude",longitude)
-      localStorage.setItem("phoneNumber",phoneNumber)
-    
-
-   
-  
-  
 
   }
 
@@ -340,7 +350,7 @@ function PharmacyRegistry() {
         {
           inputFieldsRequired.map(({ label, name, id,value,handle,error}) => {
             return (
-              <TextField margin="normal" onChange={handle} required value={value} error={Boolean(error)} helperText={error} key={name}  id={id} label={label} name={name} autoFocus variant="outlined" color='success'
+              <TextField margin="normal" onChange={handle} value={value} error={Boolean(error)} helperText={error} key={name} required id={id} label={label} name={name} autoFocus variant="outlined" color='success'
                 sx={{
                   margin: '1rem'
                 }} />)
