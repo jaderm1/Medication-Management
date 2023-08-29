@@ -31,7 +31,7 @@ function PharmacyRegistry() {
 
 
   useEffect(() => {
-    const storedList = localStorage.getItem("List");
+    const storedList = localStorage.getItem("pharmacyList");
     if (storedList) {
       setPharmacyList(JSON.parse(storedList));
     }
@@ -334,7 +334,7 @@ function PharmacyRegistry() {
 
     setPharmacyList([...pharmacyList, inputs]);
 
-    localStorage.setItem("List", JSON.stringify([...pharmacyList, inputs]));
+    localStorage.setItem("pharmacyList", JSON.stringify([...pharmacyList, inputs]));
 
         alert("Cadastro efetuado com sucesso")
 
