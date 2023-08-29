@@ -22,7 +22,7 @@ function Menu() {
     icon: <MapOutlinedIcon color='success' />
   }
   , 
-  {path: '/list',
+  {path: '/medication-list',
   name: 'Lista de Medicamentos',
   icon: <LocalPharmacyOutlinedIcon color='success'  />
   },
