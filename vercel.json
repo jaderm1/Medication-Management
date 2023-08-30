@@ -1,0 +1,10 @@
+{
+  "rewrites":  [
+    {"source": "/(.*)", "destination": "/"},
+    { "source": "src/pages/map.jsx/", "destination": "/map" },
+    {"source": "src/pages/medication-list.jsx", "destination" :"/medication-list"},
+    {"source": "src/pages/medication-registry.jsx", "destination" :"/medication-registry"},
+    {"source": "src/pages/medication-list.jsx", "destination" :"/medication-list"}
+  
+  ]
+}
