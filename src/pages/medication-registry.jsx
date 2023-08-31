@@ -141,25 +141,14 @@ function MedicationRegistry() {
 
   const typeMedications = [
     {
-      value: 'generico',
-      label: 'Generico',
+      value: 'controlado',
+      label: 'Medicamento Controlado',
     },
     {
-      value: 'referencia',
-      label: 'Referencia',
+      value: 'comum',
+      label: 'Medicamento Comum',
     },
-    {
-      value: 'similar',
-      label: 'Similar',
-    },
-    {
-      value: 'etico',
-      label: 'Etico',
-    },
-    {
-      value: 'outros',
-      label: 'Outros',
-    },
+    
   ]
 
 
