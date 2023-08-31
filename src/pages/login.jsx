@@ -35,7 +35,7 @@ function Login() {
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
 
-  
+  const userLists = JSON.parse(localStorage.getItem("userList"))||[]
 
 
 
@@ -73,12 +73,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (Boolean(emailError) || Boolean(passwordError)===true) {
-      alert("Email ou senha inválidos")
+
+    if(!userLists.some((user)=>user.email===email && user.password===password)){
+      alert("Email ou senha incorretos")
+      
     }
+
     else{
       
-      console.log(email)
      
       alert("Login efetuado com sucesso")
       navigate("/map")
