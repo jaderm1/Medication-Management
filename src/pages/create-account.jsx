@@ -1,10 +1,9 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components";
 import TextField from '@mui/material/TextField';
 import { Button, Typography, } from '@mui/material';
 import Logo from "../assets/logo.png"
 import {useNavigate } from "react-router-dom";
-import Link from '@mui/material/Link';
 
 const Form = styled.form`width: 50%;
 height: 70vh;
@@ -27,15 +26,27 @@ transform: translate(-50%, -50%);`
 
 
 
-function Login() {
+function CreateAccount() {
   
   
   const [password, setPassword] = useState("")
   const [email, setEmail] = useState("")
   const [emailError, setEmailError] = useState("")
   const [passwordError, setPasswordError] = useState("")
+  const [name, setName] = useState("")
+  const [nameError, setNameError] = useState("")
+  const [newUser, setNewUser] = useState([])
 
-  const userLists = JSON.parse(localStorage.getItem("userList"))||[]
+  useEffect(() => {
+    const storedUserList = localStorage.getItem("userList");
+    if (storedUserList) {
+      setNewUser(JSON.parse(storedUserList));
+    }
+  }, []);
+
+  const navigate = useNavigate();
+
+  
 
 
 
@@ -69,24 +80,45 @@ function Login() {
     }
 
   }
-  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if(!userLists.some((user)=>user.email===email && user.password===password)){
-      alert("Email ou senha incorretos")
-      
-    }
+    const input ={}
 
-    else{
-      
-     
-      alert("Login efetuado com sucesso")
-      navigate("/map")
-    }
-     
+    input.email = email
+    input.password = password
+    input.name = name
+
+    const newUserList = [...newUser, input]
+    setNewUser(newUserList)
+    localStorage.setItem("userList", JSON.stringify(newUserList))
+    alert("Cadastro efetuado com sucesso")
+
+    navigate("/")
+
+
+    
+    
   }
+
+
+  const handleName = (e) => {
+    setName(e.target.value)
+    if (!validateName(e.target.value)) {
+      setNameError("Nome inválido")
+    }
+    else {
+      setNameError("")
+    }
+  }
+    const validateName = (name) => {
+    const nameRegex = /^[a-zA-ZÀ-ú ]{2,30}$/
+    
+    return nameRegex.test(name)
+  }
+
+
   
 
   return (
@@ -103,8 +135,27 @@ function Login() {
 
 
         <Typography component="h1" variant="h5">
-          Pagina de Login
+          Crie sua conta
         </Typography>
+
+
+        <TextField 
+         margin="normal"
+         required
+         fullWidth
+         id="name"
+         label="Nome"
+         name="name"
+         autoComplete="name"
+         autoFocus
+         variant="outlined" color='success'
+         value={name}
+          onChange={handleName}
+          error={Boolean(nameError)}
+          helperText={nameError}
+
+         />         
+
 
         <TextField
           margin="normal"
@@ -137,15 +188,8 @@ function Login() {
           error={Boolean(passwordError)}
           helperText={passwordError}
         />
-        
-        <Link href="/create-account"  underline="hover" color='inherit'>
-        
-          Não possui conta? Crie uma agora mesmo!
-          
-         </Link>
-        
 
-        <Button variant="outlined" color='success' type="submit">Login</Button>
+        <Button variant="outlined" color='success' type="submit">Criar conta</Button>
       </Form>
 
 
@@ -153,4 +197,4 @@ function Login() {
     </>
   );
 }
-export { Login }
+export { CreateAccount }
