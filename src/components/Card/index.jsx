@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import styled from "styled-components"
-import MedicationIMG from "../../assets/generico-otc.jpg"
+import MedicationIMG from "../../assets/medication-box.jpg"
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
