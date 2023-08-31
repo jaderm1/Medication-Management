@@ -4,6 +4,7 @@ import { Map } from '../pages/map'
 import { PharmacyRegistry } from '../pages/pharmacy-registry'
 import { MedicationRegistry } from '../pages/medication-registry'
 import { MedicationList } from '../pages/medication-list'
+import { CreateAccount } from '../pages/create-account'
 
 function RoutesApp() {
     return (
@@ -14,6 +15,7 @@ function RoutesApp() {
                 <Route element={<PharmacyRegistry/>} path='/pharmacy-registry'/>
                 <Route element={<MedicationRegistry/>} path='/medication-registry'/>
                 <Route element={<MedicationList/>} path='/medication-list' />
+                <Route element={<CreateAccount/>} path='/create-account' />
 
 
 
